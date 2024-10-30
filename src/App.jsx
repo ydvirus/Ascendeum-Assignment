@@ -49,6 +49,19 @@ function App() {
           { mouseClickNum: nextClickNum, reactionTime: responseTime },
         ];
       });
+      if(intervalRef.current){
+        clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+          setActiveCell(generateRandom(1, 36));
+        }, [difficultySecond * 1000]);
+      }
+      if (responseRef.current) {
+        clearInterval(responseRef.current);
+        responseRef.current = setInterval(() => {
+          setResponseTime((prev) => prev + 1);
+        }, [1000]);
+      }
+      setResponseTime(0);
       setActiveCell(generateRandom(1, 36));
     }
   };
